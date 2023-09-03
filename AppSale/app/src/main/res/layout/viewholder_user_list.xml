@@ -1,0 +1,100 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="3dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="10dp"
+
+    android:background="@drawable/btn_cat_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/userId"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="userId"
+            android:gravity="center"
+
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/firstName"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="firstName"
+            android:gravity="center"
+
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/lastName"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="lastName"
+            android:gravity="center"
+
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="email"
+            android:gravity="center"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:text="phone"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:text="username"
+            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/password"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:text="password"-->
+<!--            android:textSize="14sp" />-->
+        <TextView
+            android:id="@+id/roleName"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="roleName"
+            android:textSize="14sp" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+
+            <CheckBox android:id="@+id/cbActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
