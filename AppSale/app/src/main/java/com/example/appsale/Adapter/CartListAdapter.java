@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.example.appsale.Domain.PopularDomain;
-import com.example.appsale.Helper.ChangeNumberItemsListener;
-import com.example.appsale.Helper.ManagmentCart;
+import com.example.appsale.Activity.Cart.Helper.ChangeNumberItemsListener;
+import com.example.appsale.Activity.Cart.Helper.ManagmentCart;
+import com.example.appsale.ObjectClass.Product;
 import com.example.appsale.R;
 
 import java.util.ArrayList;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder>{
-    ArrayList<PopularDomain> listItemSelected;
+    ArrayList<Product> listItemSelected;
     private ManagmentCart managmentCart;
     ChangeNumberItemsListener changeNumberItemsListener;
 
-    public CartListAdapter(ArrayList<PopularDomain> listItemSelected,Context context, ChangeNumberItemsListener changeNumberItemsListener) {
+    public CartListAdapter(ArrayList<Product> listItemSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
         this.listItemSelected = listItemSelected;
         managmentCart = new ManagmentCart(context);
         this.changeNumberItemsListener = changeNumberItemsListener;
@@ -39,14 +39,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CartListAdapter.ViewHolder holder, int position) {
-        holder.title.setText(listItemSelected.get(position).getTitle());
+        holder.title.setText(listItemSelected.get(position).getName());
 //        holder.feeEachItem.setText("$"+listItemSelected.get(position).getPrice());
         holder.totalEachItem.setText("$"+Math.round((listItemSelected.get(position).getNumberInCart()*listItemSelected.get(position).getPrice())));
         holder.num.setText(String.valueOf(listItemSelected.get(position).getNumberInCart()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listItemSelected.get(position).getPicUrl(),"drawable", holder.itemView.getContext().getPackageName());
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(listItemSelected.get(position).getImage(),"drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
+                .load(listItemSelected.get(position).getImage())
                 .transform(new GranularRoundedCorners(30,30,30,30))
                 .into(holder.pic);
 

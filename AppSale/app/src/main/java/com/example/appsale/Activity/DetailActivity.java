@@ -1,58 +1,161 @@
 package com.example.appsale.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.appsale.Domain.PopularDomain;
-import com.example.appsale.Helper.ManagmentCart;
+import com.example.appsale.Activity.Cart.CartActivity;
+import com.example.appsale.Adapter.CommentListAdapter;
+import com.example.appsale.Activity.Cart.Helper.ManagmentCart;
+import com.example.appsale.ObjectClass.Comment;
+import com.example.appsale.ObjectClass.Product;
+import com.example.appsale.ObjectClass.Server;
 import com.example.appsale.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     private Button addToCartBtn, buyNow;
     private TextView titleTxt, feeTxt, reviewTxt, scoreTxt;
-    private TextView tvSize, tvWeight, tvChipset, tvRam, tvStorage, tvBattery, tvVideo, tvCharging;
+    private TextView tvSize, tvWeight, tvChipset,tvComment, tvRam, tvStorage, tvBattery, tvVideo, tvCharging;
     private ImageView picItem, backBtn;
-    private PopularDomain object;
+    private Product object;
     private int numberOrder = 1;
     private ManagmentCart managmentCart;
+    private RecyclerView.Adapter adapterComment;
+    private RecyclerView recyclerViewComment;
+    private LinearLayout lỉnearComment;
+    int visible = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_product_detail);
 
         managmentCart = new ManagmentCart(this);
-
         initView();
+
+        tvComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lỉnearComment.setVisibility(View.VISIBLE);
+                visible ++;
+                if(visible > 1){
+                    visible = 0;
+                    lỉnearComment.setVisibility(View.GONE);
+                }
+            }
+        });
         getBundle();
+        getProduct();
+        getComment();
     }
+    private void getComment(){
+        object = (Product) getIntent().getSerializableExtra("object");
+        ArrayList<Comment> items = new ArrayList<>();
+        StringRequest sReq = new StringRequest(Request.Method.GET, Server.getAllCommentOfProductByProductId + object.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject commentObject = array.getJSONObject(i);
+                        Comment comment = new Comment(
+                                commentObject.getString("content"),
+                                commentObject.getString("user_name"),
+                                commentObject.getInt("star")
+                        );
+                        items.add(comment);
+                    }
+                    Log.w("Load manufacturer", String.valueOf(items));
 
+                    recyclerViewComment.setLayoutManager(new GridLayoutManager(DetailActivity.this, 1));
+                    adapterComment = new CommentListAdapter(items);
+                    recyclerViewComment.setAdapter(adapterComment);
+                } catch (
+                        JSONException e) {
+                    Log.w("Load manufacturer", "Error: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(sReq);
+    }
+    private void getProduct(){
+        object = (Product) getIntent().getSerializableExtra("object");
+        StringRequest sReq = new StringRequest(Request.Method.GET, Server.getProductInfoById + object.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(!response.equals("") || !response.isEmpty()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        tvSize.setText(jsonObject.getString("size"));
+                        tvWeight.setText(jsonObject.getString("weight"));
+                        tvChipset.setText(jsonObject.getString("chipset"));
+                        tvRam.setText(jsonObject.getString("ram"));
+                        tvStorage.setText(jsonObject.getString("storage"));
+                        tvBattery.setText(jsonObject.getString("battery"));
+                        tvCharging.setText(jsonObject.getString("charging"));
+                        tvVideo.setText(jsonObject.getString("video"));
+                    } catch (
+                            JSONException e) {
+                        Log.w("Load manufacturer", "Error: " + e.getMessage());
+                    }
+                }
+                else{
+                    Toast.makeText(DetailActivity.this, "Sản phẩm lỗi", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(sReq);
+    }
     private void getBundle() {
-        object = (PopularDomain) getIntent().getSerializableExtra("object");
+        object = (Product) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getPicUrl(), "drawable", this.getPackageName());
-
-        Glide.with(this)
-                .load(drawableResourceId)
+        Glide.with(DetailActivity.this).load(object.getImage())
                 .into(picItem);
-
-        titleTxt.setText(object.getTitle());
-        feeTxt.setText("$" + object.getPrice());
-        reviewTxt.setText(String.valueOf(object.getReview()));
-        scoreTxt.setText(String.valueOf(object.getScore()));
+        titleTxt.setText(object.getName());
+        feeTxt.setText(String.valueOf(object.getPrice()));
+        reviewTxt.setText(String.valueOf(object.getNum()));
+        scoreTxt.setText(String.valueOf(object.getAverageRating()));
 
         tvRam.setText(object.getRam());
         tvWeight.setText(String.valueOf(object.getWeight()));
         tvStorage.setText(String.valueOf(object.getStorage()));
         tvVideo.setText(object.getVideo());
-        tvChipset.setText(object.getChipSet());
+        tvChipset.setText(object.getChipset());
         tvSize.setText(String.valueOf(object.getSize()));
         tvCharging.setText(String.valueOf(object.getCharging()));
         tvBattery.setText(String.valueOf(object.getBattery()));
@@ -89,5 +192,9 @@ public class DetailActivity extends AppCompatActivity {
         tvVideo = findViewById(R.id.tvVideo);
         tvStorage = findViewById(R.id.tvStorage);
         tvWeight = findViewById(R.id.tvWeight);
+
+        tvComment = findViewById(R.id.textView22);
+        lỉnearComment = findViewById(R.id.lỉnearComment);
+        recyclerViewComment = findViewById(R.id.binhLuanSP);
     }
 }

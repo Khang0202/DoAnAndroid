@@ -23,7 +23,6 @@
         android:layout_gravity="center"
         android:gravity="center"/>
     <ScrollView
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -40,30 +39,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Mã :"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
-                <EditText
-                    android:id="@+id/edtId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_weight="2.5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Tên :"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -86,7 +62,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Hãng :"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -109,17 +85,18 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Giá :"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
+
                 <EditText
                     android:id="@+id/edtPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginTop="8dp"
+                    android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -132,7 +109,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Số lượng: "
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -155,7 +132,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Kích thước:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -178,7 +155,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Cân nặng: "
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -201,7 +178,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Loại Chip:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -224,7 +201,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Ram:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -247,7 +224,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Lưu trữ:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -270,7 +247,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Pin:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -293,7 +270,7 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
                     android:text="Tốc độ sạc:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -314,20 +291,21 @@
                 android:layout_marginTop="5dp">
                 <TextView
                     android:layout_weight="2.5"
+                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Hình ảnh:"
+                    android:text="Chất lượng hình ảnh:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
-                <ImageView
-                    android:id="@+id/imgPicture"
+                <EditText
+                    android:id="@+id/edtVideo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/pic1"/>
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -338,18 +316,21 @@
                     android:layout_weight="2.5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Video:"
+                    android:layout_gravity="center"
+                    android:text="Hình ảnh:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
-                <VideoView
-                    android:id="@+id/vdVideo"
+                <EditText
+                    android:id="@+id/imgPicture"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/morespace"
                 android:layout_width="match_parent"

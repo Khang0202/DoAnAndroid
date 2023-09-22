@@ -1,7 +1,8 @@
 package com.example.appsale.Adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.appsale.Activity.MainActivity;
 import com.example.appsale.ObjectClass.Manufacturer;
 import com.example.appsale.R;
 
@@ -23,9 +25,6 @@ import java.util.List;
 public class ManufacturerListAdapter extends RecyclerView.Adapter<ManufacturerListAdapter.Viewholder>{
     ArrayList<Manufacturer> items;
     Context context;
-
-    private Bitmap bitmap;
-
     public ManufacturerListAdapter(@NonNull Context context, List<Manufacturer> manufacturerList) {
         super();
         this.items = (ArrayList<Manufacturer>) manufacturerList;
@@ -37,38 +36,38 @@ public class ManufacturerListAdapter extends RecyclerView.Adapter<ManufacturerLi
 
     @NonNull
     @Override
-    public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ManufacturerListAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_manufacturer_list, parent, false);
         context = parent.getContext();
-        return new Viewholder(inflate);
+        return new ManufacturerListAdapter.Viewholder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        holder.manufacturerId.setText(String.valueOf(items.get(position).getId()));
-
-        holder.nameManufacturer.setText(items.get(position).getName());
+    public void onBindViewHolder(@NonNull ManufacturerListAdapter.Viewholder holder, int position) {
         Glide.with(context).load(items.get(position).getImage())
                 .transform(new GranularRoundedCorners(0,0,0,0))
                 .into(holder.imageManufacturer);
+        holder.manufacturerId.setText(String.valueOf(items.get(position).getId()));
+        holder.nameManufacturer.setText(String.valueOf(items.get(position).getName()));
         holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("object", items.get(position));
+            holder.itemView.getContext().startActivity(intent);
             Toast.makeText(context, items.get(position).getName(), Toast.LENGTH_SHORT).show();
         });
     }
-
     @Override
     public int getItemCount() {
         return items.size();
     }
     public class Viewholder extends RecyclerView.ViewHolder{
-        TextView nameManufacturer,manufacturerId;
-        ImageView imageManufacturer;
+        ImageView imageManufacturer; TextView nameManufacturer,manufacturerId;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             nameManufacturer = itemView.findViewById(R.id.nameManufacturer);
             manufacturerId = itemView.findViewById(R.id.manufacturerId);
-
             imageManufacturer = itemView.findViewById(R.id.imageManufacturer);
         }
     }

@@ -1,33 +1,32 @@
 package com.example.appsale.Adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appsale.Admin.User.ActiveUser;
+import com.example.appsale.ObjectClass.StaticClass;
 import com.example.appsale.ObjectClass.User;
 import com.example.appsale.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Viewholder>{
+public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Viewholder> {
     ArrayList<User> items;
     Context context;
-
-    private Bitmap bitmap;
-
     public UserListAdapter(@NonNull Context context, List<User> manufacturerList) {
         super();
         this.items = (ArrayList<User>) manufacturerList;
         this.context = context;
     }
+
     public UserListAdapter(ArrayList<User> items) {
         this.items = items;
     }
@@ -42,37 +41,43 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        holder.userId.setText(String.valueOf(items.get(position).getId()));
+        holder.textUserId.setText(String.valueOf(items.get(position).getId()));
+        holder.textName.setText(items.get(position).getLastName());
+        holder.textUsername.setText(items.get(position).getUsername());
+        holder.textEmail.setText(items.get(position).getEmail());
+        holder.textRole.setText(items.get(position).getRoleName());
+        if (items.get(position).isActive() == true){
+            holder.txtLock.setVisibility(View.GONE);
+        }else {
+            holder.txtLock.setVisibility(View.VISIBLE);
+        }
 
-        holder.firstName.setText(items.get(position).getFirstName());
-        holder.lastName.setText(items.get(position).getLastName());
-        holder.email.setText(items.get(position).getEmail());
-        holder.phone.setText(items.get(position).getPhone());
-//        holder.password.setText(items.get(position).getPassword());
-        holder.username.setText(items.get(position).getUsername());
-        holder.roleName.setText(items.get(position).getRoleName());
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, items.get(position).getEmail(), Toast.LENGTH_SHORT).show();
+            StaticClass.userEdit = items.get(position);
+            holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),
+                    ActiveUser.class));
         });
+
     }
+
 
     @Override
     public int getItemCount() {
         return items.size();
     }
-    public class Viewholder extends RecyclerView.ViewHolder{
-        TextView firstName,lastName,email,phone,username,password,roleName,userId;
 
+    public class Viewholder extends RecyclerView.ViewHolder {
+
+
+        TextView textUserId, textName, textUsername, textEmail, textRole, txtLock;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            firstName = itemView.findViewById(R.id.firstName);
-            lastName = itemView.findViewById(R.id.lastName);
-            email = itemView.findViewById(R.id.email);
-            phone = itemView.findViewById(R.id.phone);
-            username = itemView.findViewById(R.id.username);
-//            password = itemView.findViewById(R.id.password);
-            roleName = itemView.findViewById(R.id.roleName);
-            userId = itemView.findViewById(R.id.userId);
+            textUserId = itemView.findViewById(R.id.textUserId);
+            textName = itemView.findViewById(R.id.textName);
+            textUsername = itemView.findViewById(R.id.textUsername);
+            textEmail = itemView.findViewById(R.id.textEmail);
+            textRole = itemView.findViewById(R.id.textRole);
+            txtLock = itemView.findViewById(R.id.txtLock);
         }
     }
 }

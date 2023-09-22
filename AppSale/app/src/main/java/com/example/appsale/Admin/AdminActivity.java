@@ -8,6 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.appsale.Activity.ProfileActivity;
+import com.example.appsale.Admin.Manufacturer.AdminActivity_DSLoaiSP;
+import com.example.appsale.Admin.Phone.AdminActivity_DSDienthoai;
+import com.example.appsale.Admin.Statistics.AdminActivity_ThongKe;
+import com.example.appsale.Admin.Statistics.AdminActivity_ThongKe_DoanhThu;
+import com.example.appsale.Admin.User.ListUsers;
 import com.example.appsale.R;
 
 public class AdminActivity extends AppCompatActivity {
@@ -34,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
        txtUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminActivity.this, AdminActivity_DSUsers.class));
+                startActivity(new Intent(AdminActivity.this, ListUsers.class));
             }
         });
         txtLoai.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +51,7 @@ public class AdminActivity extends AppCompatActivity {
         txtThongKe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminActivity.this, AdminActivity_ThongKe.class));
+                startActivity(new Intent(AdminActivity.this, AdminActivity_ThongKe_DoanhThu.class));
             }
         });
 

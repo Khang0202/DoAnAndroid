@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Admin.AdminActivity_DSDienthoai">
+    tools:context=".Admin.Phone.AdminActivity_DSDienthoai">
     <ImageView
         android:id="@+id/backBtn"
         android:layout_margin="15dp"
@@ -47,50 +47,6 @@
             android:padding="8dp"
             android:stateListAnimator="@null"
             android:text="Thêm"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/btnSuaDienThoai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_border"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:outlineProvider="background"
-            android:padding="8dp"
-            android:stateListAnimator="@null"
-            android:text="Sửa"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/btnXoaDienThoai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_border"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:outlineProvider="background"
-            android:padding="8dp"
-            android:stateListAnimator="@null"
-            android:text="Xóa"
             android:textColor="@android:color/darker_gray"
             android:textSize="20sp"
             android:textStyle="bold" />

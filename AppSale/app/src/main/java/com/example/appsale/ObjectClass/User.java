@@ -1,18 +1,19 @@
 package com.example.appsale.ObjectClass;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private String username;
-    private String password;
+public class User implements Serializable {
+    private int id =-1;
+    private String firstName = "";
+    private String lastName = "";
+    private String email = "";
+    private String phone ="";
+    private String username ="";
+    private String password="";
     private Date createdDate;
     private boolean active;
-    private int roleId;
+    private int roleId = 0;
 
     public String getRoleName() {
         return roleName;
@@ -23,6 +24,15 @@ public class User {
     }
 
     private String roleName;
+
+    public User(int id,String firstName, String lastName, String email, String phone, String username) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.username = username;
+    }
 
     public User(int id, String firstName, String lastName
             , String email, String phone, String username
@@ -36,16 +46,17 @@ public class User {
         this.username = username;
         this.password = password;
         this.createdDate = createdDate;
-        this.active = active;
+        this.setActive(active);
         this.roleId = roleId;
     }
 
-    public User(int id, String lastName, String email, String username, String roleName) {
+    public User(int id, String lastName, String email, String username, String roleName, boolean active) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.roleName = roleName;
+        this.setActive(active);
     }
 
     public User(String lastName, String email, String username, String roleName) {

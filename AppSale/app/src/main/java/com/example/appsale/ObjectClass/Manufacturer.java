@@ -1,12 +1,17 @@
 package com.example.appsale.ObjectClass;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Manufacturer {
-    private int id;
-    private String name;
-    private String image;
+public class Manufacturer  implements Serializable {
+    private int id = -1;
+    private String name = "";
+    private String image = "";
+
+    public Manufacturer() {
+
+    }
 
     public int getId() {
         return id;
